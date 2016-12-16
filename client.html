@@ -1,0 +1,74 @@
+<html>
+   <head>
+      <!--
+         * Author:		Amit Sharma
+         * Contact: 	asharma@adobe.com
+         * Purpose:     Push Notification Demo
+         -->
+      <title>
+         Push Notification Demo
+      </title>
+   </head>
+   <body>
+      <time style="font-color:blue;font-style:italicised;margin-bottom:10px;">
+      </time>
+      <div>
+         <table id="container">
+         </table>
+         Try to change your csv data to update this content
+      </div>
+      <script src="http://cdn.socket.io/socket.io-1.4.5.js"></script>
+      <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script>
+         function renderTeamStats(arr) {
+         var arrLength = arr.length;
+         var str = '<thead><tr><th>Hotel Name</th><th>Available rooms</th><th>Price</th></tr></thead>';
+         for (var i = 0; i < arrLength; i++) {
+         str +='<tr class="ladderRow averages">';
+         for (var key in arr[i]) {
+             if (arr[i].hasOwnProperty(key)) {
+                 str += '<td statname="' + key.toUpperCase() + '">' + arr[i][key] + '</td>';
+             }
+         }
+         str += '</tr>';
+         }
+         //str += '</tr>';
+         $('#container').html(str);
+         }
+         var socket = io.connect('http://127.0.0.1:8000');
+
+         socket.on('connection-data', function(data) {
+         var _data = JSON.parse(data);
+         console.log(_data);
+         renderTeamStats(_data);
+         });
+         socket.on('demo-content-update', function(data) {
+         var _data = JSON.parse(data);
+         console.log(_data);
+         renderTeamStats(_data);
+         });
+      </script>
+      <style>
+         table{
+         border: solid 1px #DDEEEE;
+         border-collapse: collapse;
+         border-spacing: 0;
+         font: normal 13px Arial, sans-serif;
+         }
+         table thead th {
+         background-color: #DDEFEF;
+         border: solid 1px #DDEEEE;
+         color: #336B6B;
+         padding: 10px;
+         text-align: left;
+         text-shadow: 1px 1px 1px #fff;
+         }
+         table tbody td {
+         border: solid 1px #DDEEEE;
+         color: #333;
+         padding: 10px;
+         text-shadow: 1px 1px 1px #fff;
+         }
+      </style>
+   </body>
+</html>
