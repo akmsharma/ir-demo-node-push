@@ -35,7 +35,7 @@
          //str += '</tr>';
          $('#container').html(str);
          }
-         var socket = io.connect('https://ir-demo-node-push.herokuapp.com:8000');
+         var socket = io.connect('https://ir-demo-node-push.herokuapp.com');
 
          socket.on('connection-data', function(data) {
          var _data = JSON.parse(data);
