@@ -1,7 +1,6 @@
 var app = require('http').createServer(handler),
     io = require('socket.io').listen(app),
     Parser = new require('csvtojson').Converter,
-    conv = require("xml2json"),
     csvjson = require('csvjson'),
     path = require('path'),
     fs = require('fs');
