@@ -5,20 +5,12 @@ app.listen(process.env.PORT);
         csvjson = require('csvjson'),
         path = require('path'),
         fs = require('fs');
-app.listen(process.env.PORT);
+    app.listen(process.env.PORT);
     io.origins('*:*');
     io.sockets.setMaxListeners(0);
     console.log('server listening on localhost:' );
 
     function handler(req, res) {
-        console.log(req);
-        if(req.url =="/data.json"){
-           var data = fs.readFileSync(path.join(__dirname, '/statistics.csv'), { encoding : 'utf8'});
-           var options = { delimiter : ','};   
-           res.writeHead(200);
-           res.end(JSON.stringify(csvjson.toObject(data, options)));
-        } else{
-
         fs.readFile(__dirname + '/client.html', function(err, data) {
             if (err) {
                 console.log(err);
@@ -28,7 +20,6 @@ app.listen(process.env.PORT);
             res.writeHead(200);
             res.end(data);
         });
-        }
     }
 
     io.sockets.on('connection', function(socket) {
