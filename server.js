@@ -5,6 +5,7 @@ app.listen(process.env.PORT);
         csvjson = require('csvjson'),
         path = require('path'),
         fs = require('fs');
+app.listen(process.env.PORT);
     io.origins('*:*');
     io.sockets.setMaxListeners(0);
     console.log('server listening on localhost:' );
