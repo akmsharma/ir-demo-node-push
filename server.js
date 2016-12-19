@@ -4,10 +4,10 @@ var app = require('http').createServer(handler),
     csvjson = require('csvjson'),
     path = require('path'),
     fs = require('fs');
-app.listen(8000);
+app.listen(process.env.PORT);
 io.origins('*:*');
 io.sockets.setMaxListeners(0);
-console.log('server listening on localhost:8000');
+console.log('server listening on localhost:' + process.env.PORT);
 
 function handler(req, res) {
     fs.readFile(__dirname + '/client.html', function(err, data) {
