@@ -14,8 +14,9 @@ function handler(req, res) {
         case "/data.json":
             var data = fs.readFileSync(path.join(__dirname, '/statistics.csv'), { encoding : 'utf8'});
             var options = { delimiter : ','};
-            res.writeHead(200);
-            res.end(JSON.stringify(csvjson.toObject(data, options)));  
+
+            res.writeHead(200,{'Content-Type': 'text/plain','charset': 'utf8'});
+            res.end(JSON.stringify(csvjson.toObject(data, options)));
         default:
         fs.readFile(__dirname + '/client.html', function(err, data) {
             if (err) {
